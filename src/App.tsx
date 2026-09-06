@@ -76,7 +76,8 @@ export const App = () => {
         console.log(tasks)
     }
 
-    function removeTask(todolistId: string, taskId: string) {
+    function removeTask(payload: { todolistId: string, taskId: string }) {
+        const {todolistId, taskId} = payload;
         setTasks({
             ...tasks,
             [todolistId]: {
@@ -87,7 +88,8 @@ export const App = () => {
         // setTasks({...tasks, [todolistId]: tasks[todolistId].filter(el => el.id !== taskId)})
     }
 
-    function addTask(todolistId: string, title: string) {
+    function addTask(payload: { todolistId: string, title: string }) {
+        const{todolistId, title} = payload;
         let newTask: TaskType = {id: v1(), title: title, isDone: false};
         setTasks({
             ...tasks,
@@ -102,7 +104,8 @@ export const App = () => {
         // setTasks(newTasks);
     }
 
-    function changeStatus(todolistId: string, taskId: string, newIsDone: boolean) {
+    function changeStatus(payload: { todolistId: string, newIsDone: boolean, taskId: string }) {
+        const {todolistId, taskId, newIsDone} = payload;
         setTasks({
             ...tasks,
             [todolistId]: {
@@ -117,7 +120,12 @@ export const App = () => {
         // })
     }
 
-    function changeFilter(todolistId: string, value: FilterValuesType) {
+    function changeFilter(payload: { todolistId: string, value: FilterValuesType }) {
+        const {todolistId, value} = payload
+        setTasks({
+            ...tasks,
+            [todolistId]: {...tasks[todolistId], filter: value}
+        })
         // setTodolists(todolists.map(el => el.id === todolistId ? {...el, filter: value} : el))
     }
 
