@@ -88,7 +88,15 @@ export const App = () => {
     }
 
     function addTask(todolistId: string, title: string) {
-        // let newTask = {id: v1(), title: title, isDone: false};
+        let newTask: TaskType = {id: v1(), title: title, isDone: false};
+        setTasks({
+            ...tasks,
+            [todolistId]: {
+                ...tasks[todolistId],
+                data: [newTask, ...tasks[todolistId].data]
+            }
+        })
+
         // setTasks({...tasks, [todolistId]: [...tasks[todolistId], newTask]})
         // let newTasks = [task, ...tasks];
         // setTasks(newTasks);
