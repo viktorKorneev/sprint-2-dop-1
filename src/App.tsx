@@ -103,6 +103,14 @@ export const App = () => {
     }
 
     function changeStatus(todolistId: string, taskId: string, newIsDone: boolean) {
+        setTasks({
+            ...tasks,
+            [todolistId]: {
+                ...tasks[todolistId],
+                data: tasks[todolistId].data.map(ts => ts.id === taskId ? {...ts, isDone: newIsDone } : ts),
+            }
+        })
+
         // setTasks({
         //     ...tasks,
         //     [todolistId]: tasks[todolistId].map(el => el.id === taskId ? {...el, isDone: newIsDone} : el)
