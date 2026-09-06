@@ -52,13 +52,13 @@ export const Todolist = (props: PropsType)=> {
         props.removeTodolist(props.todolistId)
     }
 
-    // let tasksForTodolist = tasks[el.id].data;
-    // if (tasks[el.id].filter === "active") {
-    //     tasksForTodolist = tasks[el.id].data.filter(t => t.isDone === false);
-    // }
-    // if (tasks[el.id].filter === "completed") {
-    //     tasksForTodolist = tasks[el.id].data.filter(t => t.isDone === true);
-    // }
+    let tasksForTodolist = props.tasks;
+    if (props.filter === "active") {
+        tasksForTodolist = props.tasks.filter(t => t.isDone === false);
+    }
+    if (props.filter === "completed") {
+        tasksForTodolist = props.tasks.filter(t => t.isDone === true);
+    }
 
     return <div>
         <h3>
@@ -77,7 +77,7 @@ export const Todolist = (props: PropsType)=> {
         </div>
         <ul>
             {
-                props.tasks.map(t => {
+                tasksForTodolist.map(t => {
                     const onClickHandler = () => props.removeTask({todolistId:props.todolistId, taskId:t.id})
                     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
                         props.changeTaskStatus({todolistId:props.todolistId, taskId:t.id, newIsDone:e.currentTarget.checked});
